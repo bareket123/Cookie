@@ -39,12 +39,16 @@ function Login() {
     }
 
     window.addEventListener("scroll", () => {
-        if (window.scrollY > window.innerHeight / 3 && !isOpened) {
-            setIsOpened(true);
-            document.querySelector(".scroll-down").style.display = "none";
-            openModal();
-        }
-    });
+            if (window.scrollY > window.innerHeight / 3 && !isOpened) {
+                setIsOpened(true);
+                openModal();
+            }
+        });
+
+
+
+
+
 
     return (
         <div className="container">
@@ -97,7 +101,7 @@ function Login() {
                     </button>
                 </div>
                 <div className="button-container">
-                    <button className="modal-button" onClick={openModal}>Click here to login</button>
+                    <button className="modal-button" onClick={openModal}>Click here to begin your journey 🍪</button>
                 </div>
             </div>
         </div>

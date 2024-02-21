@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Recipes = () => {
+const CookiesIngredients = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Recipes = () => {
     );
 };
 
-export default Recipes;
+export default CookiesIngredients;
