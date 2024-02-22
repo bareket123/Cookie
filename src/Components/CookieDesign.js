@@ -25,11 +25,9 @@ const CookieDesign = () => {
         {x:window.innerWidth / 2.01199,y:window.innerHeight / 1.22},
 
     ]
-    const [cookieTexture, setCookieTexture] = useState(null);
+    // const [cookieTexture, setCookieTexture] = useState(null);
 
-    const handleTextureToggle = (texture) => {
-        setCookieTexture(texture);
-    };
+
 
     return (
         <div>
