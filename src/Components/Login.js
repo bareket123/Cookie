@@ -60,17 +60,17 @@ function Login() {
                         <h1 className="modal-title">Welcome!</h1>
                         <p className="modal-desc">Hey, wanna take a trip to Cookie Galaxy? Our cosmic cookie collection will have you floating in flavor space! Brace yourself for a taste journey that's totally outta this world! 🌌🍪✨.</p>
                         <div className="input-block">
-                            <label htmlFor="email" className="input-label">Username</label>
-                            <input type="text" id="email" placeholder="username" onChange={usernameChanged} value={username} />
+                            {/*<label htmlFor="email" className="input-label">Username</label>*/}
+                            <input type="text" id="email" placeholder="Username" onChange={usernameChanged} value={username} />
                         </div>
                         <div className="input-block">
-                            <label htmlFor="password" className="input-label">Password</label>
+                            {/*<label htmlFor="password" className="input-label">Password</label>*/}
                             <input type="password" name="password" id="password" placeholder="Password" onChange={passwordChanged} value={password} />
                         </div>
                         {
                             type==="signUp"&&
                             <div className="input-block">
-                                <label htmlFor="password" className="input-label">Repeat Password</label>
+                                {/*<label htmlFor="password" className="input-label">Repeat Password</label>*/}
                                 <input type="Repeat Password" name="password2" id="Repeat Password" placeholder="Repeat Password" onChange={password2Changed} value={password2} />
                             </div>
 
