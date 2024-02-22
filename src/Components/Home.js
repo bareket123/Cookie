@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import UserMenu from "./UserMenu";
 import '../Styles/LoginStyle.scss';
 import CookieDesign from "./CookieDesign";
-import {Circle, Layer, Stage} from "react-konva";
 
 
 const Home = () => {

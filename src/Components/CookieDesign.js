@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
 import '../Styles/LoginStyle.scss';
 import '../Styles/CookieDesign.css'
+import { Stage, Layer, Circle } from 'react-konva';
+
 const CookieDesign = () => {
 
     return (
