@@ -6,16 +6,17 @@ import CookieDesign from "./CookieDesign";
 
 
 const Home = () => {
+    Cookies.set("username","Admin");
     const username =Cookies.get("username");
-const [isPressed,setIsPressed]=useState(false);
- useEffect(()=>{
+    const [isPressed,setIsPressed]=useState(false);
+    useEffect(()=>{
 
- },[isPressed])
+    },[isPressed])
 
     return (
         <div>
          <UserMenu/>
-        <h1>Welcome {username}</h1>
+        <h1 style={{color:"white"}}>Welcome {username}</h1>
             <div className={"button-container"}>
 
                 <button onClick={()=>{setIsPressed(!isPressed)}}  style={ { visibility: isPressed ? 'hidden' : 'visible' } } className="modal-button">set your dream cookie</button>
