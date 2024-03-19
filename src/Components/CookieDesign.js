@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../Styles/LoginStyle.scss';
 import '../Styles/CookieDesign.css'
 import { Stage, Layer, Circle } from 'react-konva';
 import axios from "axios";
 import cookiesColor from "./CookiesColor";
 import Recipe from "./Recipe";
+import recipes from "./Recipes";
+import UserMenu from "./UserMenu";
+
 
 const CookieDesign = () => {
     const [cookieColor , setCookieColor] = useState(cookiesColor.goldBrown);
@@ -45,11 +48,20 @@ const CookieDesign = () => {
         setIsSubmit(true)
     }
 
+
+
+
     return (
-        <div>
+        <div style={{  height:" 100%",
+            position:"relative",
+            top:"70px",
+            justifyContent: "center",
+            alignItems: "center",
+            }}>
+
         {
             !isSubmit?
-                <div>
+                <div style={{position:"relative",bottom:"80px"}}>
                     <Stage width={window.innerWidth} height={window.innerHeight}>
                         <Layer>
                             <Circle
@@ -63,22 +75,33 @@ const CookieDesign = () => {
                                 shadowOffsetY={5}
                             />
                             {
-                                chipsCordi.map((chip)=>{
-                                    return (
-                                        <Circle
-                                            x={chip.x}
-                                            y={chip.y}
-                                            radius={30}
-                                            fill={cookieChipColor}
-                                            shadowColor="rgba(0,0,0,0.5)" // Add shadow for depth
-                                            shadowBlur={5}
-                                            shadowOffsetX={2}
-                                            shadowOffsetY={2}
-                                            draggable // Make circles draggable for demonstration
-                                            onDragMove={(e) => console.log('Dragging', e)}
-                                        />                            )
-                                })
-                            }
+                                chipsCordi.map((chip, index) => {
+                                // Calculate distance between chip and center of big circle and make sure all chip is inside the cookie
+                                const distance = Math.sqrt(
+                                    Math.pow(chip.x - window.innerWidth / 2, 2) +
+                                    Math.pow(chip.y - window.innerHeight / 2, 2)
+                                );
+                                const angle = Math.atan2(chip.y - window.innerHeight / 2, chip.x - window.innerWidth / 2);
+                                if (distance > 170) {
+                                    chip.x = (window.innerWidth / 2) + 170 * Math.cos(angle);
+                                    chip.y = (window.innerHeight / 2) + 170 * Math.sin(angle);
+                                }
+                                return (
+                                    <Circle
+                                        key={index}
+                                        x={chip.x}
+                                        y={chip.y}
+                                        radius={30}
+                                        fill={cookieChipColor}
+                                        shadowColor="rgba(0,0,0,0.5)" // Add shadow for depth
+                                        shadowBlur={5}
+                                        shadowOffsetX={2}
+                                        shadowOffsetY={2}
+                                        draggable // Make circles draggable for demonstration
+                                        onDragMove={(e) => console.log('Dragging', e)}
+                                    />
+                                );
+                            })}
                         </Layer>
                     </Stage>
                     <button onClick={submitButton} className={"modal-button"} style={{position: 'fixed', bottom: '50px', right: '10px'}}>Submit
@@ -123,22 +146,20 @@ const CookieDesign = () => {
 
                 </div>
                 :
+                <div className={"recipes-view"} style={{width:window.innerWidth+10}} >
+                    <div style={{ display: "flex", flexDirection: "row", whiteSpace: "nowrap" }} className={"scroll-container"}>
+                        {foundRecipes.map((recipe, index) => (
+                            <Recipe key={index} title={recipe.title} image={recipe.image} url={recipe.sourceUrl} />
+                        ))}
+                    </div>
 
-
-                    foundRecipes.map((recipe, index) => {
-                        return (
-                            <div  key={index}>
-                                <Recipe title={recipe.title} image={recipe.image} url={recipe.sourceUrl} />
-                            </div>
-                        );
-                    })
-
-
-
-
-
+                </div>
 
         }
+            {
+                isSubmit&&
+                <button className={"go-back"} onClick={()=>{setIsSubmit(!isSubmit)}}>Go Back</button>
+            }
 
         </div>
     );

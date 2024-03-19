@@ -10,16 +10,19 @@ import CookieDesign from "./Components/CookieDesign";
 
 function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path={"/home"} element={<Home/>}></Route>
-          <Route path={"/"} element={<Login/>}></Route>
-          <Route path={"/ingredients"} element={<CookiesIngredients/>}></Route>
-          <Route path={"/recipes"} element={<Recipes/>}></Route>
-          <Route path={"/cookieDesign"} element={<CookieDesign/>}></Route>
 
-        </Routes>
-      </BrowserRouter>
+          <BrowserRouter>
+              <Routes>
+                  <Route path={"/home"} element={<Home/>}></Route>
+                  <Route path={"/"} element={<Login/>}></Route>
+                  <Route path={"/ingredients"} element={<CookiesIngredients/>}></Route>
+                  <Route path={"/recipes"} element={<Recipes/>}></Route>
+                  <Route path={"/cookieDesign"} element={<CookieDesign/>}></Route>
+
+              </Routes>
+          </BrowserRouter>
+
+
   );
 }
 
