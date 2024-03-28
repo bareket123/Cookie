@@ -104,7 +104,7 @@ const CookieDesign = () => {
                             })}
                         </Layer>
                     </Stage>
-                    <button onClick={submitButton} className={"modal-button"} style={{position: 'fixed', bottom: '50px', right: '10px'}}>Submit
+                    <button onClick={submitButton}  className={"modal-button"} style={{position: 'fixed', bottom: '50px', right: '10px'}}>Submit
                     </button>
                     <label style={{top: '200px', textDecoration: 'underline'}}>Type Of Dough:
                         <label style={{top: '230px'}}>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../Styles/Recipe.css'; // Import the CSS file for styling
+import '../Styles/Recipe.css';
 
 const Recipe = (props) => {
     const [addButtonText,setAddButtonText]=useState("Add to my favorites 🌠")
@@ -8,6 +8,7 @@ const Recipe = (props) => {
         setAddButtonText("Added 👍🤎")
 
     }
+
 
     return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginRight: "20px", textAlign: "center", fontSize: "10px",marginBottom:"10px"}}>
@@ -18,6 +19,7 @@ const Recipe = (props) => {
                 <img style={{height: "200px", width: "250px",  border: "10px solid rgba(0, 0, 128, 0.1)", borderRadius: "5px"}} src={props.image} alt={props.title} />
             </a>
             <button disabled={addButtonText==="Added 👍🤎"} onClick={handleAddButton} className="button-64" role="button"><span className="text">{addButtonText}</span></button>
+
         </div>
 
 

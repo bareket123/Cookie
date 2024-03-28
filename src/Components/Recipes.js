@@ -2,9 +2,11 @@ import React from 'react';
 import UserMenu from "./UserMenu";
 
 const Recipes = () => {
+
     return (
         <div>
             <UserMenu/>
+
 
         </div>
     );
