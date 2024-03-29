@@ -6,7 +6,6 @@ import Home from "./Components/Home";
 import CookiesIngredients from "./Components/CookiesIngredients";
 import Recipes from "./Components/Recipes";
 import CookieDesign from "./Components/CookieDesign";
-import ScrapRecipes from "./Components/ScrapRecipes";
 
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
                   <Route path={"/CookiesIngredients"} element={<CookiesIngredients/>}></Route>
                   <Route path={"/recipes"} element={<Recipes/>}></Route>
                   <Route path={"/cookieDesign"} element={<CookieDesign/>}></Route>
-                  <Route path={"/ScrapRecipes"} element={<ScrapRecipes/>}></Route>
 
               </Routes>
           </BrowserRouter>
