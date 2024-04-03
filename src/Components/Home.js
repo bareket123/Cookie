@@ -9,20 +9,9 @@ import axios from "axios";
 const Home = () => {
 
 
-    const [username,setUsername]= useState("");
+    const username= Cookies.get("username");
     const [isPressed,setIsPressed]=useState(false);
-    useEffect(()=>{
-        const token= Cookies.get("token");
-        axios.get("http://localhost:8989/get-username-by-token?token="+token)
-            .then((res)=>{
-            if (res.data.success){
-                Cookies.set("username",res.data.token)
-                setUsername(Cookies.get("username"));
-            }else {
-                console.log("error in finding token: "+res.data.errorCode)
-            }
-        })
-    },[])
+
     useEffect(()=>{
 
     },[isPressed])

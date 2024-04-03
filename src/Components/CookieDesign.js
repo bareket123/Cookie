@@ -5,7 +5,7 @@ import { Stage, Layer, Circle } from 'react-konva';
 import axios from "axios";
 import cookiesColor from "./CookiesColor";
 import Recipe from "./Recipe";
-import recipes from "./Recipes";
+import recipes from "./FavRecipes";
 import UserMenu from "./UserMenu";
 
 

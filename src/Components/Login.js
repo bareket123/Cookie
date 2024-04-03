@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../Styles/LoginStyle.scss';
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -40,18 +41,30 @@ function Login() {
         // Your submit logic goes here
         switch (type){
             case "login":
+            axios.get("http://localhost:8989/login?username="+username+"&password="+password)
+                .then((res)=>{
+                if (res.data.success){
+                    Cookies.set("token",res.data.token)
+                    Cookies.set("username",username)
+                    navigate("/home")
+                }else{
+                    alert(res.data.errorCode)
 
+                }
+            })
 
-            Cookies.set("token","E6437BFFB2207449EEFD36AB878EFC5E")
-            navigate("../home")
                 break;
             case "signUp" :
+                axios.get("http://localhost:8989/sign-up?username="+username+"&password="+password)
+                    .then((res)=>{
+                        if (res.data.success){
+                            setType("login")
+                        }else{
+                            alert(res.data.errorCode)
+                        }
+                    })
 
-                setType("login")
                 break;
-            default:
-                break;
-
         }
     }
 
@@ -63,8 +76,13 @@ function Login() {
         });
 
 
+    const valid = () => {
 
+       return     (( password.length < 6) ||
+                (password !== password2 && type === "signUp") ||
+           (username.length === 0) );
 
+    };
 
 
     return (
@@ -88,7 +106,7 @@ function Login() {
                             type==="signUp"&&
                             <div className="input-block">
                                 {/*<label htmlFor="password" className="input-label">Repeat Password</label>*/}
-                                <input type="Repeat Password" name="password2" id="Repeat Password" placeholder="Repeat Password" onChange={password2Changed} value={password2} />
+                                <input type="password" name="password2" id="Repeat Password" placeholder="Repeat Password"  onChange={password2Changed} value={password2} />
                             </div>
 
                         }
@@ -96,7 +114,7 @@ function Login() {
 
                         <div className="modal-buttons">
                              <a href=""> {type==="login"?"Forgot your password?":""}</a>
-                            <button className="input-button" onClick={submit}>{type==="login"?"Login":"Sign Up"}</button>
+                            <button className="input-button" disabled={valid()} onClick={submit}>{type==="login"?"Login":"Sign Up"}</button>
                         </div>
                         {
                             type==="login"?

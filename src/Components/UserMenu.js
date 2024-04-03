@@ -12,7 +12,7 @@ const UserMenu = () => {
     const links =[
         {to:"/home",text:"Home"},
         {to:"/CookiesIngredients",text:"Recipes By Ingredients"},
-        {to:"/recipes",text:"My Recipes"},
+        {to:"/recipes",text:"My FavRecipes"},
         {to:"/",text:"Log out"}
 
     ]
