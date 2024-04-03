@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
 *{box-sizing:border-box}
 body{font-family:"Nunito", sans-serif;color:rgba(0,0,0,0.7);
-  background-image: url("https://th.bing.com/th/id/OIG2.4wHUElm.1s8Sh77JRU_F?pid=ImgGn");
-  background-size: 100%;
-  background-position: center;
-  //background-repeat: no-repeat;
   height: 100vh; /* Set the container's height to take up the entire viewport height */
   scroll-snap-type: y mandatory;
+  margin: 0;
+  padding: 0;
+  background: url("https://th.bing.com/th/id/OIG2.4wHUElm.1s8Sh77JRU_F?pid=ImgGn") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .modal{position:fixed;left:0;bottom:0;width:100%;height:60px;background:rgba(51,51,51,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:0.4s}
