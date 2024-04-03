@@ -24,7 +24,6 @@ const CookieDesign = () => {
         {x:window.innerWidth / 1.666,y:window.innerHeight / 1.39},
         {x:window.innerWidth / 2.229,y:window.innerHeight / 1.339},
         {x:window.innerWidth / 2.01199,y:window.innerHeight / 1.22},
-
     ]
 
     function submitButton() {

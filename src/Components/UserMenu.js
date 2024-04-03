@@ -8,17 +8,18 @@ import '../Styles/UserMenu.css';
 
 const UserMenu = () => {
 
-    const navigate = useNavigate();
-    const token=Cookies.get("token");
 
     const links =[
         {to:"/home",text:"Home"},
         {to:"/CookiesIngredients",text:"Recipes By Ingredients"},
         {to:"/recipes",text:"My Recipes"},
-        {to:"/",text:"Log out"},
+        {to:"/",text:"Log out"}
 
     ]
-
+    const handleLogOUt=()=>{
+        Cookies.remove('token');
+        Cookies.remove('username');
+    }
 
 
 
@@ -30,7 +31,8 @@ const UserMenu = () => {
                         links.map((link) => {
                             return (
                                 <th>
-                                    <NavLink id={"font-nav"} to={link.to}> {link.text} </NavLink>
+                                    <NavLink id={"font-nav"} to={link.to} onClick={link.text === "Log out" ? handleLogOUt : () => {}}> {link.text}  </NavLink>
+                                    {/*<button onClick={handleLogOUt}>Log out</button>*/}
                                 </th>
                             )
                         })

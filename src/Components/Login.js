@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import '../Styles/LoginStyle.scss'; // Import your SCSS file
+import '../Styles/LoginStyle.scss';
+import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -7,7 +9,7 @@ function Login() {
     const [password2, setPassword2] = useState("");
     const [type, setType] = useState("login");
     const [isOpened, setIsOpened] = useState(false);
-
+    const navigate=useNavigate();
     const usernameChanged = (event) => {
         setUsername(event.target.value);
     }
@@ -36,6 +38,21 @@ function Login() {
 
     const submit = () => {
         // Your submit logic goes here
+        switch (type){
+            case "login":
+
+
+            Cookies.set("token","E6437BFFB2207449EEFD36AB878EFC5E")
+            navigate("../home")
+                break;
+            case "signUp" :
+
+                setType("login")
+                break;
+            default:
+                break;
+
+        }
     }
 
     window.addEventListener("scroll", () => {
