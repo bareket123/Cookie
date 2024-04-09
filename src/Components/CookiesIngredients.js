@@ -91,7 +91,7 @@ const CookiesIngredients = () => {
             <UserMenu/>
             {
                 !showRecipes?
-                    <div>
+                    <div style={{marginTop:"100px"}}>
                         <h1 className={"header"}>Pick ingredients you got at home </h1>
                         <div>
                             <ul>
@@ -132,9 +132,9 @@ const CookiesIngredients = () => {
                     </div>
                     :
                     <div>
-                        <div className={"recipes-view"}>
-                            <h1 className={"header"}>✨ Explore a collection of delicious recipes below! ✨</h1>
-                            <div style={{ display: "flex", flexDirection: "row" }} className={"scroll-container"}>
+                        <div className={"recipes-view"} style={{marginTop:"50px"}}>
+                            <h1 className={"header"} style={{position:"fixed"}}>✨ Explore a collection of delicious recipes below! ✨</h1>
+                            <div style={{ display: "flex", flexDirection: "row",marginTop:"150px" }} className={"scroll-container"}>
 
                                 {
                                     foundRecipes.map((currentRecipe,index)=>{

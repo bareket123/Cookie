@@ -7,6 +7,8 @@ import cookiesColor from "./CookiesColor";
 import Recipe from "./Recipe";
 import recipes from "./FavRecipes";
 import UserMenu from "./UserMenu";
+import cheerio from "cheerio"
+import LoadingLogo from "./LoadingLogo";
 
 
 const CookieDesign = () => {
@@ -26,13 +28,102 @@ const CookieDesign = () => {
         {x:window.innerWidth / 2.01199,y:window.innerHeight / 1.22},
     ]
 
+    const fetchData = async (searchWords) => {
+       let tempArray=[]
+        try {
+            const response = await fetch(`http://localhost:3001/proxy/search?q=${searchWords}`); // Use your proxy server URL here
+            if (response.ok) {
+                const html = await response.text();
+                const $ = cheerio.load(html);
+                const listItems = $('article.atoms_card__MIRyu');
+                listItems.each((index, element) => {
+                    const recipeLink=$(element).find("a.link_link__7WCQy").attr("href")
+                    const recipeImage=$(element).find("figure.atoms_imageBlock__P0ym6").find("img.cardimage_image__EYWRG").attr("srcset")
+                    console.log(recipeImage)
+                    const recipeTitle = $(element).find('.atoms_textBlock__QKkI_ h3').text();
+                    tempArray.push({title:recipeTitle,sourceUrl:"https://cooking.nytimes.com/"+recipeLink,image:recipeImage})
+                })
+                setFoundRecipes(tempArray.slice(0,15))
+            } else {
+                console.error('Failed to fetch data');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     function submitButton() {
 
         let query = "";
         switch (cookieChipColor){
             case cookiesColor.chocolateChip:
-                query="chocolate+chip+cookies"
+                switch (cookieColor){
+                    case cookiesColor.goldBrown:
+                        //get from Spoonacular API
+                        query="chocolate+chip+cookies"
+                        break;
+                    case cookiesColor.redVelvet:
+                        /*
+                        there isn't recipes of red with milk chocolate
+                         */
+                        //fetchData().then(r => {alert("inside")});
+                        break;
+                    case cookiesColor.darkBrown:
+                        fetchData(`chocolate+chips+cookies`)
+                        break;
+
+                }
                 break;
+
+            case cookiesColor.whiteChocolate:
+                switch (cookieColor){
+                    case cookiesColor.goldBrown:
+                        query="white+chocolate+cookies"
+                        break;
+                    case cookiesColor.redVelvet:
+                        fetchData(`red+cookies+with+white+chocolate+chips`).then(r => {alert("inside")});
+                        break;
+                    case cookiesColor.darkBrown:
+                        fetchData(`black+cookies+with+white+chocolate`)
+                        break;
+
+                }
+                break;
+
+            case cookiesColor.saltCaramelChip:
+                switch (cookieColor){
+                    case cookiesColor.goldBrown:
+                        fetchData(`salt+caramel+cookies`)
+                        break;
+                    case cookiesColor.redVelvet:
+                     /*not found recipes in the website */
+                        break;
+                    case cookiesColor.darkBrown:
+                        fetchData(`black+cookies+with+salt+caramel`)
+                        break;
+
+                }
+                break;
+
+            case cookiesColor.milkChocolateChip:
+                switch (cookieColor){
+                    case cookiesColor.goldBrown:
+                       fetchData(`cookies+with+milk+chocolate+chips`)
+                        break;
+                    case cookiesColor.redVelvet:
+                        /*
+                       there isn't recipes of red with milk chocolate
+                        */
+                        //fetchData(``).then(r => {alert("inside")});
+                        break;
+                    case cookiesColor.darkBrown:
+                        fetchData(`dark+0cookies+with+chocolate`)
+                        break;
+
+                }
+                break
+
 
         }
         const api_key = "e3c693562dee4f888713ca5113daf302";
@@ -51,17 +142,12 @@ const CookieDesign = () => {
 
 
     return (
-        <div style={{  height:" 100%",
-            position:"relative",
-            top:"70px",
-            justifyContent: "center",
-            alignItems: "center",
-            }}>
+        <div style={{  height:" 100%", position:"relative", top:"70px", justifyContent: "center", alignItems: "center",}}>
 
         {
             !isSubmit?
                 <div style={{position:"relative",bottom:"80px"}}>
-                    <Stage width={window.innerWidth} height={window.innerHeight}>
+                    <Stage width={window.innerWidth} height={window.innerHeight} style={{position:"fixed"}}>
                         <Layer>
                             <Circle
                                 x={window.innerWidth / 2}
@@ -145,19 +231,28 @@ const CookieDesign = () => {
 
                 </div>
                 :
-                <div className={"recipes-view"} style={{width:window.innerWidth+10}} >
-                    <div style={{ display: "flex", flexDirection: "row", whiteSpace: "nowrap" }} className={"scroll-container"}>
-                        {foundRecipes.map((recipe, index) => (
-                            <Recipe key={index} title={recipe.title} image={recipe.image} url={recipe.sourceUrl} />
-                        ))}
-                    </div>
+                <div className={"recipes-view"} style={{width:window.innerWidth+10}}>
+                    {
+                        foundRecipes.length===0?
+                            <LoadingLogo/>
+                            :
+                            <div style={{ display: "flex", flexDirection: "row", whiteSpace: "nowrap",marginTop:"10px" }} className={"scroll-container"}>
+
+                                {
+                                    foundRecipes.map((recipe, index) => (
+                                        <Recipe key={index} title={recipe.title} image={recipe.image} url={recipe.sourceUrl} />
+                                    ))}
+                            </div>
+
+                    }
+
 
                 </div>
 
         }
             {
                 isSubmit&&
-                <button className={"go-back"} onClick={()=>{setIsSubmit(!isSubmit)}}>Go Back</button>
+                <button className={"go-back"} onClick={()=>{setIsSubmit(!isSubmit);setFoundRecipes([])}}>Go Back</button>
             }
 
         </div>

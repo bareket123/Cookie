@@ -19,20 +19,23 @@ const Home = () => {
     return (
         <div>
          <UserMenu/>
-        <h1 style={{color:"white"}}>Welcome {username}</h1>
-            <div className={"button-container"}>
-                <button onClick={()=>{setIsPressed(!isPressed)}}  style={ { visibility: isPressed ? 'hidden' : 'visible' } } className="modal-button">set your dream cookie</button>
+            <div style={{marginTop:"100px",position:"fixed"}}>
+                <h1 style={{color:"white"}}>Welcome {username}</h1>
+                <div className={"button-container"}>
+                    <button onClick={()=>{setIsPressed(!isPressed)}}  style={ { visibility: isPressed ? 'hidden' : 'visible' } } className="modal-button">set your dream cookie</button>
+
+                </div>
+                {
+                    isPressed&&
+                    <div style={{position:"relative",bottom:"100px"}}>
+                        <CookieDesign/>
+                    </div>
+
+
+                }
+
 
             </div>
-            {
-            isPressed&&
-                <div style={{position:"relative",bottom:"100px"}}>
-                    <CookieDesign/>
-                </div>
-
-
-        }
-
 
         </div>
     );

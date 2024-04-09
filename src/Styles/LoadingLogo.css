@@ -1,0 +1,22 @@
+.loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: "Nunito", sans-serif;
+    font-size: 40px;
+    background: radial-gradient(circle closest-side,#f7e4cb 10%,#0000) right/calc(200% - 1em) 100%;
+    animation: l24 1s infinite alternate linear;
+}
+.loader::before {
+    content: "Loading...";
+    line-height: 1em;
+    color: #0000;
+    background: inherit;
+    background-image: radial-gradient(circle closest-side,	#eecc77 94%,#56320f);
+    -webkit-background-clip:text;
+}
+
+@keyframes l24{
+    100%{background-position: left}
+}
+
+
