@@ -8,6 +8,7 @@ const FavRecipes = () => {
 
     const token = Cookies.get("token");
     const [favRecipes,setFavRecipes]=useState([]);
+
     useEffect(() => {
         axios.get("http://localhost:8989/get-all-favorites-recipes?token="+token)
             .then((res)=>{
@@ -20,7 +21,7 @@ const FavRecipes = () => {
 
 
 
-    }, []);
+    }, [favRecipes]);
 
 
     return (
@@ -36,7 +37,7 @@ const FavRecipes = () => {
                                     // Rendering three recipes per row
                                     favRecipes.slice(rowIndex * 3, rowIndex * 3 + 3).map((currentRecipe, cellIndex) => (
                                         <div key={cellIndex} style={{ display: "table-cell", borderStyle: "solid", borderColor:"rgb(212,175,55)", borderWidth: 2, textAlign: "center" }}>
-                                            <Recipe isFav={true} title={currentRecipe.title} image={currentRecipe.imgLink} url={currentRecipe.link} />
+                                            <Recipe isFav={true} id={currentRecipe.id} title={currentRecipe.title} image={currentRecipe.imgLink} url={currentRecipe.link} />
                                         </div>
                                     ))
                                 }

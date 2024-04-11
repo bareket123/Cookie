@@ -139,7 +139,7 @@ const CookiesIngredients = () => {
                                 {
                                     foundRecipes.map((currentRecipe,index)=>{
                                         return(
-                                            <Recipe key={index} title={currentRecipe.title} image={currentRecipe.image} url={allUrls[index]}/>
+                                            <Recipe isFav={false} key={index} title={currentRecipe.title} image={currentRecipe.image} url={allUrls[index]}/>
                                         )
                                     })
                                 }
