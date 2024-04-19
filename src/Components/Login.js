@@ -3,14 +3,29 @@ import '../Styles/LoginStyle.scss';
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [securityQuestion, setSecurityQuestion] = useState("");
+    const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
     const [type, setType] = useState("login");
     const [isOpened, setIsOpened] = useState(false);
+
+
+
+    const handleSecurityQuestionsChange = (event) => {
+        setSecurityQuestion(event.target.value);
+    };
+
     const navigate=useNavigate();
+
+    const securityQuestionAnswerChange=(event)=>{
+        setSecurityQuestionAnswer(event.target.value)
+    }
+
     const usernameChanged = (event) => {
         setUsername(event.target.value);
     }
@@ -55,7 +70,7 @@ function Login() {
 
                 break;
             case "signUp" :
-                axios.get("http://localhost:8989/sign-up?username="+username+"&password="+password)
+                axios.get("http://localhost:8989/sign-up?username="+username+"&password="+password+"&securityQuestionNumber="+securityQuestion+"&answerSecurityQuestion="+securityQuestionAnswer)
                     .then((res)=>{
                         if (res.data.success){
                             setType("login")
@@ -86,9 +101,7 @@ function Login() {
 
 
     return (
-        <div className="container">
-
-
+        <div className="mainFrame">
             <div className={`modal ${isOpened ? 'is-open' : ''}`}>
                 <div className="modal-container">
                     <div className="modal-left">
@@ -104,16 +117,33 @@ function Login() {
                         </div>
                         {
                             type==="signUp"&&
+                            <div>
+
                             <div className="input-block">
                                 {/*<label htmlFor="password" className="input-label">Repeat Password</label>*/}
                                 <input type="password" name="password2" id="Repeat Password" placeholder="Repeat Password"  onChange={password2Changed} value={password2} />
                             </div>
+                                <div style={{marginBottom:"10px"}}>
+                                    <select value={securityQuestion} onChange={handleSecurityQuestionsChange}>
+                                        <option disabled={true} value="">Select a security questionAnswer</option>
+                                        <option value="1">What city were you born in?</option>
+                                        <option value="2">What is your oldest sibling’s name?</option>
+                                        <option value="3">In what city or town did your parents meet?</option>
+                                        <option value="4">What was the name of your first school teacher?</option>
+                                    </select>
+                                </div>
+                            <div className="input-block">
+                                    <input name="securityQuestionAnswer" placeholder="Write your Answer Here"  onChange={securityQuestionAnswerChange} value={securityQuestionAnswer} />
+                            </div>
+
+                            </div>
+
 
                         }
 
 
                         <div className="modal-buttons">
-                             <a href=""> {type==="login"?"Forgot your password?":""}</a>
+                             <a href={"forgetPassword"}> {type==="login"?"Forgot your password?":""}</a>
                             <button className="input-button" disabled={valid()} onClick={submit}>{type==="login"?"Login":"Sign Up"}</button>
                         </div>
                         {

@@ -26,7 +26,6 @@ const Recipe = (props) => {
         }
     }
 function deleteRecipe(){
-        alert("dd")
     if (token!==""){
         axios.get("http://localhost:8989/delete-recipe?recipeId="+props.id)
             .then((res)=>{
@@ -56,7 +55,7 @@ function deleteRecipe(){
                         role="button"><span className="text">{buttonsText}</span></button>
                :
                <div>
-                <AiFillDelete onClickCapture={deleteRecipe} id={"myButton"} className={"t"} style={{fontSize:"50px"}} onClick={()=>{alert("jj")}} />
+                <AiFillDelete onClickCapture={deleteRecipe} id={"myButton"} className={"t"} style={{fontSize:"50px"}} />
                 <div id="textContainer">Delete Recipe</div>
                 </div>
             }

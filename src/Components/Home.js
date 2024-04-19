@@ -18,7 +18,7 @@ const Home = () => {
 
     return (
         <div>
-         <UserMenu/>
+            <UserMenu/>
             <div style={{marginTop:"100px",position:"fixed"}}>
                 <h1 style={{color:"white"}}>Welcome {username}</h1>
                 <div className={"button-container"}>

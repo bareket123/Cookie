@@ -52,7 +52,35 @@ const CookieDesign = () => {
             console.error('Error:', error);
         }
     };
+    async function fetchDateFromPinterest() {
+        try {
+            const response = await fetch(`http://localhost:3001/proxy/search/pins/?q=red+velvet+cookies+with+chocolate+chip&rs=typed`); // Use your proxy server URL here
+            if (response.ok) {
+                const html = await response.text();
+                console.log(html)
+                // const $ = cheerio.load(html);
+                // const listItems = $('article.atoms_card__MIRyu');
+                // listItems.each((index, element) => {
+                //     const recipeLink = $(element).find("a.link_link__7WCQy").attr("href")
+                //     const recipeImage = $(element).find("figure.atoms_imageBlock__P0ym6").find("img.cardimage_image__EYWRG").attr("srcset")
+                //     console.log(recipeImage)
+                //     const recipeTitle = $(element).find('.atoms_textBlock__QKkI_ h3').text();
+                //     tempArray.push({
+                //         title: recipeTitle,
+                //         sourceUrl: "https://cooking.nytimes.com/" + recipeLink,
+                //         image: recipeImage
+                //     })
+                // })
+                // setFoundRecipes(tempArray.slice(0, 15))
+            } else {
+                console.error('Failed to fetch data');
+            }
 
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+    }
     function submitButton() {
 
         let query = "";
@@ -60,8 +88,10 @@ const CookieDesign = () => {
             case cookiesColor.chocolateChip:
                 switch (cookieColor){
                     case cookiesColor.goldBrown:
+                        fetchDateFromPinterest()
                         //get from Spoonacular API
                         query="chocolate+chip+cookies"
+
                         break;
                     case cookiesColor.redVelvet:
                         /*
