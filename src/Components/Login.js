@@ -3,7 +3,6 @@ import '../Styles/LoginStyle.scss';
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
-import Dropdown from 'react-bootstrap/Dropdown';
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -93,7 +92,7 @@ function Login() {
 
     const valid = () => {
 
-       return     (( password.length < 6) ||
+       return (( password.length < 6) ||
                 (password !== password2 && type === "signUp") ||
            (username.length === 0) );
 
