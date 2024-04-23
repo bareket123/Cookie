@@ -122,15 +122,15 @@ function Login() {
                                 {/*<label htmlFor="password" className="input-label">Repeat Password</label>*/}
                                 <input type="password" name="password2" id="Repeat Password" placeholder="Repeat Password"  onChange={password2Changed} value={password2} />
                             </div>
-                                <div style={{marginBottom:"10px"}}>
-                                    <select value={securityQuestion} onChange={handleSecurityQuestionsChange}>
-                                        <option disabled={true} value="">Select a security questionAnswer</option>
-                                        <option value="1">What city were you born in?</option>
-                                        <option value="2">What is your oldest sibling’s name?</option>
-                                        <option value="3">In what city or town did your parents meet?</option>
-                                        <option value="4">What was the name of your first school teacher?</option>
-                                    </select>
-                                </div>
+                                        <select className={"select"} value={securityQuestion} onChange={handleSecurityQuestionsChange}>
+                                            <option disabled={true} value="">Select A Security Question 🔐 </option>
+                                            <option className={"select-option"} value="1">What city were you born in?</option>
+                                            <option className={"select-option"} value="2">What is your oldest sibling’s name?</option>
+                                            <option className={"select-option"} value="3">In what city or town did your parents meet?</option>
+                                            <option className={"select-option"} value="4">What was the name of your first school teacher?</option>
+                                        </select>
+
+
                             <div className="input-block">
                                     <input name="securityQuestionAnswer" placeholder="Write your Answer Here"  onChange={securityQuestionAnswerChange} value={securityQuestionAnswer} />
                             </div>

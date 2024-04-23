@@ -268,4 +268,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.select{
+    margin-bottom: 10px;
+    border-width: thick;
+    border-radius: 20px;
+    border-color: transparent;
+    color: darkred;
+    font-weight: bold;
+    font-family: "Nunito", sans-serif;
+    background-color: rosybrown;
+}
+.select-option{
+color: whitesmoke;
+}
 
