@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Styles/LoginStyle.scss';
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
@@ -12,6 +12,16 @@ function Login() {
     const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
     const [type, setType] = useState("login");
     const [isOpened, setIsOpened] = useState(false);
+
+
+    useEffect(() => {
+        const token = Cookies.get("token");
+        if (token == undefined) {
+            navigate("../")
+        } else {
+            navigate("../home")
+        }
+    }, [type])
 
 
 
@@ -60,7 +70,7 @@ function Login() {
                 if (res.data.success){
                     Cookies.set("token",res.data.token)
                     Cookies.set("username",username)
-                    navigate("/home")
+                    navigate("../home")
                 }else{
                     alert(res.data.errorCode)
 
